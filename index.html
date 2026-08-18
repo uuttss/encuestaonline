@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Encuesta de satisfacción de estudiantes para el curso de Antigravity. Califica contenidos, aplicabilidad y déjanos tus comentarios.">
+  <title>Encuesta de Satisfacción | Curso Antigravity</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Decorative background elements -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-pattern"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="badge-pill">
+        <span class="badge-dot"></span>
+        <span>Evaluación Académica</span>
+      </div>
+      <h1 class="main-title">
+        Curso <span class="gradient-text">Antigravity</span>
+      </h1>
+      <p class="main-subtitle">
+        Queremos conocer tu experiencia. Tu retroalimentación nos ayuda a seguir mejorando cada lección y práctica.
+      </p>
+      
+      <div class="stats-bar">
+        <div class="stat-item">
+          <span class="stat-icon">⏱️</span>
+          <span>Tiempo estimado: <strong>2 min</strong></span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">🔒</span>
+          <span>Respuestas <strong>confidenciales</strong></span>
+        </div>
+        <div class="stat-item">
+          <button id="viewResultsBtn" type="button" class="btn-text-link">
+            📊 Ver respuestas (<span id="savedCountBadge">0</span>)
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Card with Form -->
+    <main class="card-container" id="cardContainer">
+      <!-- Survey Form -->
+      <form id="surveyForm" novalidate>
+        
+        <!-- Progress indicator -->
+        <div class="progress-wrapper">
+          <div class="progress-info">
+            <span class="progress-label">Progreso de la encuesta</span>
+            <span class="progress-percent" id="progressPercent">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+          </div>
+        </div>
+
+        <!-- Section 1: ID Estudiante -->
+        <section class="form-section">
+          <div class="section-header">
+            <div class="section-number">1</div>
+            <div>
+              <label for="id_estudiante" class="section-title">Identificador del Estudiante</label>
+              <p class="section-desc">Ingresa tu código de alumno, nombre o correo institucional.</p>
+            </div>
+          </div>
+
+          <div class="input-field-wrapper">
+            <div class="input-icon">👤</div>
+            <input 
+              type="text" 
+              id="id_estudiante" 
+              name="id_estudiante" 
+              class="text-input" 
+              placeholder="Ej. EST-2026-089 o nombre de usuario" 
+              required
+              autocomplete="off"
+            >
+          </div>
+          <span class="error-message" id="error_id_estudiante">Por favor ingresa tu identificador.</span>
+        </section>
+
+        <!-- Section 2: Nivel de Satisfacción -->
+        <section class="form-section">
+          <div class="section-header">
+            <div class="section-number">2</div>
+            <div>
+              <span class="section-title">Nivel General de Satisfacción</span>
+              <p class="section-desc">¿Cuál es tu grado de satisfacción general con el curso de Antigravity?</p>
+            </div>
+          </div>
+
+          <div class="scale-group" role="radiogroup" aria-labelledby="label-satisfaccion">
+            <div class="scale-labels">
+              <span>1 - Muy insatisfecho</span>
+              <span>5 - Muy satisfecho</span>
+            </div>
+            
+            <div class="rating-options">
+              <label class="rating-card" data-rating="1">
+                <input type="radio" name="nivel_satisfaccion" value="1" required>
+                <div class="rating-content">
+                  <span class="rating-emoji">😞</span>
+                  <span class="rating-num">1</span>
+                  <span class="rating-text">Muy insatisfecho</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="2">
+                <input type="radio" name="nivel_satisfaccion" value="2">
+                <div class="rating-content">
+                  <span class="rating-emoji">🙁</span>
+                  <span class="rating-num">2</span>
+                  <span class="rating-text">Insatisfecho</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="3">
+                <input type="radio" name="nivel_satisfaccion" value="3">
+                <div class="rating-content">
+                  <span class="rating-emoji">😐</span>
+                  <span class="rating-num">3</span>
+                  <span class="rating-text">Neutral</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="4">
+                <input type="radio" name="nivel_satisfaccion" value="4">
+                <div class="rating-content">
+                  <span class="rating-emoji">😊</span>
+                  <span class="rating-num">4</span>
+                  <span class="rating-text">Satisfecho</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="5">
+                <input type="radio" name="nivel_satisfaccion" value="5">
+                <div class="rating-content">
+                  <span class="rating-emoji">🤩</span>
+                  <span class="rating-num">5</span>
+                  <span class="rating-text">Muy satisfecho</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <span class="error-message" id="error_nivel_satisfaccion">Selecciona una calificación del 1 al 5.</span>
+        </section>
+
+        <!-- Section 3: Claridad del Contenido -->
+        <section class="form-section">
+          <div class="section-header">
+            <div class="section-number">3</div>
+            <div>
+              <span class="section-title">Claridad del Contenido</span>
+              <p class="section-desc">¿Qué tan claros y comprensibles fueron las explicaciones y materiales?</p>
+            </div>
+          </div>
+
+          <div class="scale-group" role="radiogroup" aria-labelledby="label-claridad">
+            <div class="scale-labels">
+              <span>1 - Muy poco claro</span>
+              <span>5 - Muy claro</span>
+            </div>
+
+            <div class="rating-options">
+              <label class="rating-card" data-rating="1">
+                <input type="radio" name="claridad_contenido" value="1" required>
+                <div class="rating-content">
+                  <span class="rating-emoji">🌫️</span>
+                  <span class="rating-num">1</span>
+                  <span class="rating-text">Muy poco claro</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="2">
+                <input type="radio" name="claridad_contenido" value="2">
+                <div class="rating-content">
+                  <span class="rating-emoji">🧩</span>
+                  <span class="rating-num">2</span>
+                  <span class="rating-text">Poco claro</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="3">
+                <input type="radio" name="claridad_contenido" value="3">
+                <div class="rating-content">
+                  <span class="rating-emoji">💡</span>
+                  <span class="rating-num">3</span>
+                  <span class="rating-text">Aceptable</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="4">
+                <input type="radio" name="claridad_contenido" value="4">
+                <div class="rating-content">
+                  <span class="rating-emoji">📖</span>
+                  <span class="rating-num">4</span>
+                  <span class="rating-text">Claro</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="5">
+                <input type="radio" name="claridad_contenido" value="5">
+                <div class="rating-content">
+                  <span class="rating-emoji">✨</span>
+                  <span class="rating-num">5</span>
+                  <span class="rating-text">Muy claro</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <span class="error-message" id="error_claridad_contenido">Selecciona una opción sobre la claridad.</span>
+        </section>
+
+        <!-- Section 4: Aplicabilidad Práctica -->
+        <section class="form-section">
+          <div class="section-header">
+            <div class="section-number">4</div>
+            <div>
+              <span class="section-title">Aplicabilidad Práctica</span>
+              <p class="section-desc">¿Consideras que lo aprendido en Antigravity es aplicable a proyectos reales?</p>
+            </div>
+          </div>
+
+          <div class="scale-group" role="radiogroup" aria-labelledby="label-aplicabilidad">
+            <div class="scale-labels">
+              <span>1 - Nada aplicable</span>
+              <span>5 - Muy aplicable</span>
+            </div>
+
+            <div class="rating-options">
+              <label class="rating-card" data-rating="1">
+                <input type="radio" name="aplicabilidad_practica" value="1" required>
+                <div class="rating-content">
+                  <span class="rating-emoji">❌</span>
+                  <span class="rating-num">1</span>
+                  <span class="rating-text">Nada aplicable</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="2">
+                <input type="radio" name="aplicabilidad_practica" value="2">
+                <div class="rating-content">
+                  <span class="rating-emoji">📉</span>
+                  <span class="rating-num">2</span>
+                  <span class="rating-text">Poco aplicable</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="3">
+                <input type="radio" name="aplicabilidad_practica" value="3">
+                <div class="rating-content">
+                  <span class="rating-emoji">⚖️</span>
+                  <span class="rating-num">3</span>
+                  <span class="rating-text">Moderadamente</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="4">
+                <input type="radio" name="aplicabilidad_practica" value="4">
+                <div class="rating-content">
+                  <span class="rating-emoji">🚀</span>
+                  <span class="rating-num">4</span>
+                  <span class="rating-text">Bastante aplicable</span>
+                </div>
+              </label>
+
+              <label class="rating-card" data-rating="5">
+                <input type="radio" name="aplicabilidad_practica" value="5">
+                <div class="rating-content">
+                  <span class="rating-emoji">🔥</span>
+                  <span class="rating-num">5</span>
+                  <span class="rating-text">Muy aplicable</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <span class="error-message" id="error_aplicabilidad_practica">Selecciona una opción sobre la aplicabilidad.</span>
+        </section>
+
+        <!-- Section 5: Comentarios Adicionales -->
+        <section class="form-section">
+          <div class="section-header">
+            <div class="section-number">5</div>
+            <div>
+              <label for="comentarios_adicionales" class="section-title">Comentarios Adicionales</label>
+              <p class="section-desc">Comparte tus sugerencias, temas que te gustaría profundizar o felicitaciones.</p>
+            </div>
+          </div>
+
+          <div class="textarea-wrapper">
+            <textarea 
+              id="comentarios_adicionales" 
+              name="comentarios_adicionales" 
+              class="textarea-input" 
+              rows="4" 
+              placeholder="¿Qué fue lo más valioso del curso? ¿Qué mejorarías para las próximas ediciones?"
+              maxlength="600"
+            ></textarea>
+            <div class="char-count">
+              <span id="charCurrent">0</span>/600 caracteres
+            </div>
+          </div>
+        </section>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="reset" id="resetBtn" class="btn-secondary">
+            <span>Limpiar</span>
+          </button>
+          <button type="submit" id="submitBtn" class="btn-primary">
+            <span class="btn-text">Enviar Encuesta</span>
+            <span class="btn-icon">🚀</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Success Card (Shown after submit) -->
+      <div id="successCard" class="success-card hidden" aria-live="polite">
+        <div class="success-icon-wrapper">
+          <div class="success-pulse"></div>
+          <div class="success-icon">🎉</div>
+        </div>
+        <h2 class="success-title">¡Muchas gracias por tu respuesta!</h2>
+        <p class="success-subtitle">
+          Tus respuestas han sido registradas correctamente y nos ayudarán a perfeccionar el curso de Antigravity.
+        </p>
+
+        <!-- Summary of Submission -->
+        <div class="submission-summary">
+          <h3 class="summary-title">Resumen de tu evaluación</h3>
+          <div class="summary-grid" id="summaryGrid">
+            <!-- Populated dynamically by app.js -->
+          </div>
+        </div>
+
+        <div class="success-actions">
+          <button type="button" id="newResponseBtn" class="btn-primary">
+            <span>Enviar otra respuesta</span>
+            <span>✍️</span>
+          </button>
+          <button type="button" id="openResultsFromSuccessBtn" class="btn-secondary">
+            <span>Ver todas las respuestas</span>
+            <span>📊</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal for Viewing Saved Responses -->
+    <div id="responsesModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <h2 id="modalTitle" class="modal-title">Respuestas Registradas</h2>
+            <p class="modal-subtitle">Almacenadas localmente en tu navegador</p>
+          </div>
+          <button type="button" id="closeModalBtn" class="modal-close-btn" aria-label="Cerrar modal">&times;</button>
+        </div>
+
+        <!-- Metric Summary Chips -->
+        <div class="metrics-row" id="metricsRow">
+          <div class="metric-chip">
+            <span class="metric-val" id="metricTotal">0</span>
+            <span class="metric-label">Total Alumnos</span>
+          </div>
+          <div class="metric-chip">
+            <span class="metric-val" id="metricSatisfaccion">0.0</span>
+            <span class="metric-label">Prom. Satisfacción</span>
+          </div>
+          <div class="metric-chip">
+            <span class="metric-val" id="metricClaridad">0.0</span>
+            <span class="metric-label">Prom. Claridad</span>
+          </div>
+          <div class="metric-chip">
+            <span class="metric-val" id="metricAplicabilidad">0.0</span>
+            <span class="metric-label">Prom. Aplicabilidad</span>
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="table-responsive">
+          <table class="responses-table" id="responsesTable">
+            <thead>
+              <tr>
+                <th>Fecha/Hora</th>
+                <th>ID Alumno</th>
+                <th>Satisfacción</th>
+                <th>Claridad</th>
+                <th>Aplicabilidad</th>
+                <th>Comentarios</th>
+              </tr>
+            </thead>
+            <tbody id="responsesTableBody">
+              <!-- Inserted dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <div id="noResponsesMessage" class="empty-state hidden">
+          <span class="empty-icon">📝</span>
+          <p>Aún no hay respuestas registradas. Completa la encuesta para ver los datos aquí.</p>
+        </div>
+
+        <!-- Modal Actions -->
+        <div class="modal-footer">
+          <button type="button" id="clearAllBtn" class="btn-danger-outline">
+            🗑️ Borrar todo
+          </button>
+          <div class="footer-right-actions">
+            <button type="button" id="exportCsvBtn" class="btn-secondary">
+              📥 Exportar CSV
+            </button>
+            <button type="button" id="exportJsonBtn" class="btn-primary">
+              💾 Exportar JSON
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <p>Diseñado para la comunidad educativa de <strong>Antigravity</strong> &bull; 2026</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
