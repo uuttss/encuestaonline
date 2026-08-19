@@ -1,0 +1,19 @@
+{
+  "name": "encuestaonline",
+  "version": "1.0.0",
+  "description": "Encuesta de Satisfacción - Curso Antigravity",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "encuesta",
+    "antigravity",
+    "n8n"
+  ],
+  "author": "",
+  "license": "ISC"
+}
